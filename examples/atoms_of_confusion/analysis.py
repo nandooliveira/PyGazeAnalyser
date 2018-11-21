@@ -20,7 +20,7 @@ import numpy
 # CONSTANTS
 
 # PARTICIPANTS
-PPS = ['gaze_data']
+PPS = ['dennistask2']
 
 # DIRECTORIES
 # paths
@@ -40,7 +40,7 @@ if not os.path.isdir(PLOTDIR):
 	os.mkdir(PLOTDIR)
 
 # DATA FILES
-SEP = ',' # value separator
+SEP = '\t' # value separator
 EDFSTART = "TRIALSTART" # EDF file trial start message
 EDFSTOP = "TRIALEND" # EDF file trial end message
 TRIALORDER = [EDFSTART, 'image online','image offline', EDFSTOP]
@@ -121,7 +121,7 @@ for ppname in PPS:
         fixations = []
         x_points = []
         y_points = []
-        imagefile = os.path.join(IMGDIR, 'bg3.jpg')
+        imagefile = os.path.join(IMGDIR, 'flow2_task2.jpg')
         raw_file = os.path.join(pplotdir, 'raw')
         scatter_file = os.path.join(pplotdir, 'fixations')
         scanpath_file = os.path.join(pplotdir, 'scanpath')
@@ -142,7 +142,7 @@ for ppname in PPS:
 
         draw_raw(x_points, y_points, DISPSIZE, imagefile=imagefile, savefilename=raw_file)
         draw_fixations(fixations, DISPSIZE, imagefile=imagefile, durationsize=True, durationcolour=False, alpha=0.5, savefilename=scatter_file)
-        draw_scanpath(fixations, saccades, DISPSIZE, imagefile=imagefile, alpha=0.5, savefilename=scanpath_file)
+        #draw_scanpath(fixations, saccades, DISPSIZE, imagefile=imagefile, alpha=0.5, savefilename=scanpath_file)
         draw_heatmap(fixations, DISPSIZE, imagefile=imagefile, durationweight=True, alpha=0.5, savefilename=heatmap_file)
 
 	# loop through trials

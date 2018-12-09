@@ -20,7 +20,7 @@ import numpy
 # CONSTANTS
 
 # PARTICIPANTS
-PPS = ['dennistask2']
+PPS = ['test']
 
 # DIRECTORIES
 # paths
@@ -121,7 +121,7 @@ for ppname in PPS:
         fixations = []
         x_points = []
         y_points = []
-        imagefile = os.path.join(IMGDIR, 'flow2_task2.jpg')
+        imagefile = os.path.join(IMGDIR, 'test.jpg')
         raw_file = os.path.join(pplotdir, 'raw')
         scatter_file = os.path.join(pplotdir, 'fixations')
         scanpath_file = os.path.join(pplotdir, 'scanpath')

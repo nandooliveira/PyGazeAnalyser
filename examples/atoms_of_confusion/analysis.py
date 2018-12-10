@@ -1,11 +1,12 @@
-# analysis script for natural viewing experiment
+# analysis script for atoms of confusion experiment
 #
-# version 1 (1 Mar 2014)
+# version 2 (10 Dez 2018)
 
-__author__ = "Edwin Dalmaijer"
+__author__ = "Fernando Oliveira"
 
 # native
 import os
+import sys
 
 # custom
 from pygazeanalyser.gazeplotter import draw_fixations, draw_heatmap, draw_scanpath, draw_raw
@@ -18,9 +19,6 @@ from database import easy
 
 # # # # #
 # CONSTANTS
-
-# PARTICIPANTS
-PPS = [1]
 
 # DIRECTORIES
 # paths
@@ -43,17 +41,32 @@ SCREENSIZE = (39.9,29.9) # (cm,cm)
 SCREENDIST = 61.0 # cm
 PXPERCM = numpy.mean([DISPSIZE[0]/SCREENSIZE[0],DISPSIZE[1]/SCREENSIZE[1]]) # px/cm
 
+# # # # # #
+# USER DATA
+
+# PARTICIPANTS IDS
+user_ids = raw_input(u"Insert users' IDs separated by comma (ex: 1,2,3): ")
+PPS = map(int, user_ids.replace(' ', '').split(',')) # exe: PPS = [1, 2]
+
+# BACKGROUND IMAGE
+while True:
+    background_image = raw_input("\n\nPut the BG file at " + IMGDIR + " folder and type its name here (Make sure it is a jpg file): ") + '.jpg'
+    if os.path.exists(os.path.join(IMGDIR, background_image)):
+        print "Background image successfully found!..."
+        break
+    else:
+        print "\n\nI did not find the file at, " + str(os.path.join(IMGDIR, background_image))
+
 # # # # #
 # READ FILES
 
 # loop through all participants
 for participant_id in PPS:
-    print("starting data analysis for participant '%s'" % (participant_id))
-
-    # BEHAVIOUR
-    print("loading behavioural data")
-
     participant = easy.get_participant(participant_id)
+    print("starting data analysis for participant '%s'" % (participant['name']))
+
+    # LOAD POINTS
+    print("loading points from database...")
     points = easy.get_points(participant['task1_start'], participant['task1_end'])
 
     # GAZE DATA
@@ -75,7 +88,7 @@ for participant_id in PPS:
     fixations = []
     x_points = []
     y_points = []
-    imagefile = os.path.join(IMGDIR, 'bg3.jpg')
+    imagefile = os.path.join(IMGDIR, background_image)
     raw_file = os.path.join(pplotdir, 'raw')
     scatter_file = os.path.join(pplotdir, 'fixations')
     scanpath_file = os.path.join(pplotdir, 'scanpath')

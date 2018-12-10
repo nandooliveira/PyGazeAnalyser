@@ -35,7 +35,6 @@ def get_points(start_datetime, end_datetime):
         rows = []
 
         while row is not None:
-            print row
             rows.append(row)
             row = cur.fetchone()
 

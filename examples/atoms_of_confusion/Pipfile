@@ -10,7 +10,6 @@ pytz = "*"
 psycopg2 = "*"
 numpy = "*"
 matplotlib = "*"
-tkinter = "*"
 
 [requires]
 python_version = "2.7"

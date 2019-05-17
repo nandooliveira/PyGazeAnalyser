@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from easy import get_list, print_row_dict_list
+from executions import Execution
+from points import Point
 
 
 class Task():
@@ -10,6 +12,16 @@ class Task():
             'select * from experiments_task where experiment_id = %s',
             (experiment_id,)
         )
+
+    @staticmethod
+    def all_points(task_id):
+        executions = Execution.by_task(task_id)
+        points = []
+
+        for execution in executions:
+            points += Point.by_execution(execution)
+
+        return points
 
 
 # list = Task.by_experiment(2)

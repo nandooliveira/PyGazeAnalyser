@@ -7,8 +7,11 @@ from pauses import Pause
 
 class Point():
     @staticmethod
-    def by_interval(execution):
+    def by_execution(execution):
         """query points data for a given execution"""
+        if execution['start'] is None or execution['end'] is None:
+            return []
+
         utc = pytz.UTC
         pattern = "%Y-%m-%d %H:%M:%S"
         start = execution['start'].astimezone(utc).strftime(pattern)

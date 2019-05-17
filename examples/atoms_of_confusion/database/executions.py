@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from easy import get_single_result, print_row_dict_list
+from easy import get_single_result, print_row_dict_list, get_list
 
 
 class Execution():

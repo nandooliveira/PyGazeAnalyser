@@ -17,7 +17,7 @@ import numpy
 
 from database import easy
 from database.tasks import Task
-from database.point import Point
+from database.points import Point
 
 # # # # #
 # CONSTANTS
@@ -45,15 +45,15 @@ PXPERCM = numpy.mean([DISPSIZE[0]/SCREENSIZE[0],DISPSIZE[1]/SCREENSIZE[1]]) # px
 
 # BACKGROUND IMAGE
 while True:
-    background_image = raw_input("\n\nPut the BG file at " + IMGDIR + " folder and type its name here (Make sure it is a jpg file): ") + '.jpg'
+    background_image = raw_input("\n\nPut the BG file at " + IMGDIR + " folder and type its name here (Make sure it is a jpg file): ") + '.png'
     if os.path.exists(os.path.join(IMGDIR, background_image)):
         print "Background image successfully found!..."
         break
     else:
         print "\n\nI did not find the file at, " + str(os.path.join(IMGDIR, background_image))
 
-# # # # #
-# READ FILES
+
+print 'get task and points..\n'
 
 # loop through all tasks
 for task in Task.by_experiment(2):
@@ -92,16 +92,23 @@ for task in Task.by_experiment(2):
     saccades = []
 
     for point in points:
-        x_points.append(point['x'])
-        y_points.append(point['y'])
-        fixations.append([time.time(), time.time(), 1, int(float(point['x'])), int(float(point['y']))])
+        x = float(point['x'].replace(',', '.'))
+        y = float(point['y'].replace(',', '.'))
+        print "%f %f" % (x, y,)
+
+        x_points.append(x)
+        y_points.append(y)
+
+        fixations.append([time.time(), time.time(), 1, x, y])
 
         if len(previous_point) != 0:
-            saccades.append([time.time(), time.time(), 1, int(float(previous_point['x'])), int(float(previous_point['y'])), int(float(point['x'])), int(float(point['y']))])
+            previous_x = float(previous_point['x'].replace(',', '.'))
+            previous_y = float(previous_point['y'].replace(',', '.'))
+            saccades.append([time.time(), time.time(), 1, previous_x, previous_y, x, y])
 
         previous_point = point
 
+    draw_heatmap(fixations, DISPSIZE, imagefile=imagefile, durationweight=True, alpha=0.5, savefilename=heatmap_file)
     draw_raw(x_points, y_points, DISPSIZE, imagefile=imagefile, savefilename=raw_file)
     draw_fixations(fixations, DISPSIZE, imagefile=imagefile, durationsize=True, durationcolour=False, alpha=0.5, savefilename=scatter_file)
     draw_scanpath(fixations, saccades, DISPSIZE, imagefile=imagefile, alpha=0.5, savefilename=scanpath_file)
-    draw_heatmap(fixations, DISPSIZE, imagefile=imagefile, durationweight=True, alpha=0.5, savefilename=heatmap_file)

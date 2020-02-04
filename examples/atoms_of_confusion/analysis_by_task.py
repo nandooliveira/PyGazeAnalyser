@@ -32,7 +32,7 @@ def c_time():
 # paths
 DIR = os.path.dirname(__file__)
 IMGDIR = os.path.join(DIR, 'imgs')
-PLOTDIR = os.path.join(DIR, 'plots')
+PLOTDIR = os.path.join(DIR, 'plots_pilotv2')
 
 # check if the image directory exists
 if not os.path.isdir(IMGDIR):
@@ -51,12 +51,14 @@ PXPERCM = numpy.mean([DISPSIZE[0]/SCREENSIZE[0], DISPSIZE[1]/SCREENSIZE[1]])  # 
 print('%s: Get task and points' % c_time())
 
 # loop through all tasks
-for task in Task.by_experiment(2):
+for task in Task.by_experiment(3):
     print("%s: Starting data analysis for task '%s'" % (c_time(), task['description'],))
 
     print("%s: Loading bg image" % c_time())
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    print(dir_path)
     background_image = task['description'] + '.jpg'
-    if os.path.exists(os.path.join(IMGDIR, 'newimages', background_image)):
+    if os.path.exists(os.path.join(IMGDIR, background_image)):
         print("%s: Background image successfully found!" % c_time())
     else:
         raise ValueError("Could not find bg image at %s" % str(os.path.join(IMGDIR, background_image)))
@@ -81,7 +83,7 @@ for task in Task.by_experiment(2):
     fixations = []
     x_points = []
     y_points = []
-    imagefile = os.path.join(IMGDIR, 'newimages', background_image)
+    imagefile = os.path.join(IMGDIR, background_image)
     raw_file = os.path.join(pplotdir, 'raw')
     scatter_file = os.path.join(pplotdir, 'fixations')
     scanpath_file = os.path.join(pplotdir, 'scanpath')

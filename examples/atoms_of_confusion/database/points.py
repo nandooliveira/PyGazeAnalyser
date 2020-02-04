@@ -14,8 +14,10 @@ class Point():
 
         utc = pytz.UTC
         pattern = "%Y-%m-%d %H:%M:%S"
-        start = execution['start'].astimezone(utc).strftime(pattern)
-        end = execution['end'].astimezone(utc).strftime(pattern)
+        # start = execution['start'].astimezone(utc).strftime(pattern)
+        # end = execution['end'].astimezone(utc).strftime(pattern)
+        start = execution['start'].strftime(pattern) # .astimezone(utc).strftime(pattern)
+        end = execution['end'].strftime(pattern) #.astimezone(utc).strftime(pattern)
 
         list = get_list(
             "select * from experiments_point where datetime between '%s' and '%s'",
@@ -28,8 +30,8 @@ class Point():
     def __is_point_inside_pause(point, pause):
         utc = pytz.UTC
         pattern = "%Y-%m-%d %H:%M:%S"
-        pause_start = pause['start_time'].astimezone(utc).strftime(pattern)
-        pause_end = pause['end_time'].astimezone(utc).strftime(pattern)
+        pause_start = pause['start_time'].strftime(pattern) #.astimezone(utc).strftime(pattern)
+        pause_end = pause['end_time'].strftime(pattern) # .astimezone(utc).strftime(pattern)
         datetime = point['datetime'].strftime(pattern)
 
         return datetime >= pause_start and datetime <= pause_end

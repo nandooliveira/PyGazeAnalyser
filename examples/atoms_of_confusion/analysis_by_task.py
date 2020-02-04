@@ -32,7 +32,7 @@ def c_time():
 # paths
 DIR = os.path.dirname(__file__)
 IMGDIR = os.path.join(DIR, 'imgs')
-PLOTDIR = os.path.join(DIR, 'plots_pilotv2')
+PLOTDIR = os.path.join(DIR, 'plots_puc')
 
 # check if the image directory exists
 if not os.path.isdir(IMGDIR):
@@ -51,7 +51,7 @@ PXPERCM = numpy.mean([DISPSIZE[0]/SCREENSIZE[0], DISPSIZE[1]/SCREENSIZE[1]])  # 
 print('%s: Get task and points' % c_time())
 
 # loop through all tasks
-for task in Task.by_experiment(3):
+for task in Task.by_experiment(4):
     print("%s: Starting data analysis for task '%s'" % (c_time(), task['description'],))
 
     print("%s: Loading bg image" % c_time())
@@ -111,10 +111,10 @@ for task in Task.by_experiment(3):
     print("%s: Generating Heat Map" % c_time())
     draw_heatmap(fixations, DISPSIZE, imagefile=imagefile, durationweight=True, alpha=0.5, savefilename=heatmap_file)
 
-    print("%s: Generating Raw Chart" % c_time())
-    draw_raw(x_points, y_points, DISPSIZE, imagefile=imagefile, savefilename=raw_file)
+    # print("%s: Generating Raw Chart" % c_time())
+    # draw_raw(x_points, y_points, DISPSIZE, imagefile=imagefile, savefilename=raw_file)
 
-    print("%s: Generating Fixations Map" % c_time())
-    draw_fixations(fixations, DISPSIZE, imagefile=imagefile, durationsize=True, durationcolour=False, alpha=0.5,
-                   savefilename=scatter_file)
+    # print("%s: Generating Fixations Map" % c_time())
+    # draw_fixations(fixations, DISPSIZE, imagefile=imagefile, durationsize=True, durationcolour=False, alpha=0.5,
+    #                savefilename=scatter_file)
     # draw_scanpath(fixations, saccades, DISPSIZE, imagefile=imagefile, alpha=0.5, savefilename=scanpath_file)

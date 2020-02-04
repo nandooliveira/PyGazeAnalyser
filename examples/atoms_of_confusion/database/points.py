@@ -28,6 +28,9 @@ class Point():
 
     @staticmethod
     def __is_point_inside_pause(point, pause):
+        if pause['start_time'] is None or pause['end_time'] is None:
+            return False
+
         utc = pytz.UTC
         pattern = "%Y-%m-%d %H:%M:%S"
         pause_start = pause['start_time'].strftime(pattern) #.astimezone(utc).strftime(pattern)

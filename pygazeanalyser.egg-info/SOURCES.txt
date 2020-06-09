@@ -1,0 +1,15 @@
+README.md
+setup.py
+pygazeanalyser/__init__.py
+pygazeanalyser/detectors.py
+pygazeanalyser/edfreader.py
+pygazeanalyser/eyetribereader.py
+pygazeanalyser/gazeplotter.py
+pygazeanalyser/idfreader.py
+pygazeanalyser/opengazereader.py
+pygazeanalyser/traces.py
+pygazeanalyser.egg-info/PKG-INFO
+pygazeanalyser.egg-info/SOURCES.txt
+pygazeanalyser.egg-info/dependency_links.txt
+pygazeanalyser.egg-info/not-zip-safe
+pygazeanalyser.egg-info/top_level.txt

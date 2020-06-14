@@ -15,7 +15,7 @@ def print_row_dict_list(list):
 
 
 def get_connection():
-    return psycopg2.connect("dbname=easy user=postgres password=postgres")
+    return psycopg2.connect("dbname=easy host=127.0.0.1 user=postgres password=postgres")
 
 
 def run_with_cursor(query_func):
@@ -44,7 +44,7 @@ def get_single_result(query, params):
     return run_with_cursor(query_func)
 
 
-def get_list(query, params):
+def get_list(query, params=tuple()):
     def query_func(cur):
         cur.execute(query % params)
         row = cur.fetchone()

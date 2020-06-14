@@ -10,6 +10,7 @@ pytz = "*"
 psycopg2 = "*"
 numpy = "*"
 matplotlib = "*"
+pillow = "*"
 
 [requires]
 python_version = "2.7"

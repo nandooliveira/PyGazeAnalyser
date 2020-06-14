@@ -20,7 +20,7 @@ class Point():
         end = execution['end'].strftime(pattern) #.astimezone(utc).strftime(pattern)
 
         list = get_list(
-            "select * from experiments_point where datetime between '%s' and '%s'",
+            "select * from experiments_point where datetime between '%s' and '%s' order by id asc",
             (start, end,)
         )
 

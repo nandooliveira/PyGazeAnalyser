@@ -83,7 +83,9 @@ for participant_id in PPS:
 
     # # # # #
     # PLOTS
-
+    # --185.
+    # 171.
+    # 169
     print("plotting gaze data")
     fixations = []
     x_points = []

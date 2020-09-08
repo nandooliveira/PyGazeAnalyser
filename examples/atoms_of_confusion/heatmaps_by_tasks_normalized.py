@@ -90,7 +90,6 @@ def heatmap_for_task(task, points):
     print("%s: Generating Heat Map" % c_time())
     draw_heatmap(fixations, DISPSIZE, imagefile=imagefile, durationweight=False, alpha=0.5, savefilename=heatmap_file)
 
-
 print('%s: Get task and points' % c_time())
 
 functions = ['AV1', 'AV2', 'CO1', 'CO2', 'LACF1', 'LACF2']
